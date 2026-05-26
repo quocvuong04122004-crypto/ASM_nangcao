@@ -61,6 +61,7 @@
         "*.meta": "yaml",
         "*.prefab": "yaml",
         "*.unity": "yaml",
+        "*.unity": "yaml"
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
@@ -68,4 +69,5 @@
         "*.slnx": "*.csproj"
     },
     "dotnet.defaultSolution": "ASM_Nangcao.slnx"
+    "dotnet.defaultSolution": "ASM_nangcao.slnx"
 }
