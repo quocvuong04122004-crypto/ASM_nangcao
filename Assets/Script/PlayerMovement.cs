@@ -57,8 +57,8 @@ public class PlayerMovement : MonoBehaviour
     inputActions.Player.Sprint.IsPressed();
 
         Vector3 move =
-    transform.right * moveInput.x +
-    transform.forward * moveInput.y;
+    characterModel.right * moveInput.x +
+    characterModel.forward * moveInput.y;
 
         // Rotate model theo hướng di chuyển
         Vector3 lookDirection = new Vector3(move.x, 0f, move.z);
