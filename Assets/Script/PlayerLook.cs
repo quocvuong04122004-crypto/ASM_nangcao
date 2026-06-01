@@ -16,12 +16,9 @@ public class PlayerLook : MonoBehaviour
 
     [Header("Zoom")]
     public Transform cameraTransform;
-    
 
     private CinemachineCamera cinemachineCamera;
     private CinemachineThirdPersonFollow thirdPersonFollow;
-
-    
 
     public float zoomSpeed = 2f;
     public float minZoom = 2f;
