@@ -339,7 +339,7 @@ MonoBehaviour:
   cameraHolder: {fileID: 324216655}
   mouseSensitivity: 100
   cameraTransform: {fileID: 2026686959}
-  zoomSpeed: 2
+  zoomSpeed: 10
   minZoom: 2
   maxZoom: 8
 --- !u!1 &324216654
@@ -617,17 +617,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4540229000190281644, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'RingFinger3_L'\n\tTransform 'Hip_L'\n\tTransform
-        'RingFinger1_R'\n\tTransform 'PinkyFinger1_R'\n\tTransform 'Wrist_L'\n\tTransform
-        'ThumbFinger3_L'\n\tTransform 'PinkyFinger2_R'\n\tTransform 'ThumbFinger2_L'\n\tTransform
-        'Ankle_L'\n\tTransform 'RingFinger3_R'\n\tand more ...\n\tFrom animation
-        clip 'mixamo.com'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4540229000190281644, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4593465579059566623, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
