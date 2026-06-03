@@ -75,10 +75,11 @@ public class PlayerMovement : MonoBehaviour
             );
         }
 
-        // Animation Walk
-        bool isWalking = moveInput.magnitude > 0.1f;
+        // Animation
+        bool isMoving = moveInput.magnitude > 0.1f;
 
-        animator.SetBool("Walk", isWalking);
+        animator.SetBool("Walk", isMoving);
+        animator.SetBool("Run", isMoving && isSprinting);
 
         // Gravity
         if (controller.isGrounded && yVelocity < 0)
@@ -100,11 +101,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnJump(InputAction.CallbackContext context)
+{
+    if (controller.isGrounded)
     {
-        // Chỉ nhảy khi chạm đất
-        if (controller.isGrounded)
-        {
-            yVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
+        animator.SetTrigger("Jump");
+
+        yVelocity = Mathf.Sqrt(
+            jumpHeight * -2f * gravity
+        );
     }
+}
 }
