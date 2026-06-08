@@ -17,6 +17,10 @@ public class PlayerLook : MonoBehaviour
     [Header("Zoom")]
     public Transform cameraTransform;
 
+    [Header("Look Limit")]
+    public float minLookAngle = -40f;
+    public float maxLookAngle = 70f;
+
     private CinemachineCamera cinemachineCamera;
     private CinemachineThirdPersonFollow thirdPersonFollow;
 
@@ -61,7 +65,7 @@ public class PlayerLook : MonoBehaviour
 
         // Xoay dọc camera
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, minLookAngle, maxLookAngle);
 
         cameraHolder.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
