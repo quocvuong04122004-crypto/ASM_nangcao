@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 99c9720ab356a0642a771bea13969a05
+  m_OcclusionCullingData: {fileID: 36300000, guid: a96a0fd1e3f1eff4e917767d94e61f37, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -153,6 +153,8 @@ MonoBehaviour:
   cameraHolder: {fileID: 1617642444}
   mouseSensitivity: 100
   cameraTransform: {fileID: 2122243827}
+  minLookAngle: -40
+  maxLookAngle: 70
   zoomSpeed: 20
   minZoom: 2
   maxZoom: 8
@@ -207,7 +209,7 @@ Transform:
   m_GameObject: {fileID: 57168834}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.18858, y: 22.8, z: 163.11}
+  m_LocalPosition: {x: 26.18858, y: 22.8, z: 111.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -486,7 +488,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.988579, y: 25.300001, z: 159.11}
+  m_LocalPosition: {x: 26.988579, y: 25.300001, z: 107.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1421,7 +1423,7 @@ Transform:
   m_GameObject: {fileID: 2122243823}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.988579, y: 25.300001, z: 159.11}
+  m_LocalPosition: {x: 26.988579, y: 25.300001, z: 107.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
