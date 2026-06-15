@@ -1157,7 +1157,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1246556185}
         m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: GoToTrangchu
+        m_MethodName: GoToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

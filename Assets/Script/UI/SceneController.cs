@@ -12,6 +12,12 @@ public class SceneController : MonoBehaviour
     // Nút MENU
     public void GoToMenu()
     {
+        SceneManager.LoadScene("Menu");
+    }
+
+    // Nút Trangchu
+    public void GoToTrangchu()
+    {
         SceneManager.LoadScene("Main");
     }
 }
