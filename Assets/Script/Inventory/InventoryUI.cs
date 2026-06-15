@@ -11,6 +11,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject slotPrefab;
     [SerializeField] private Transform slotContainer;
     [SerializeField] private int slotCount = 20;
+    public static InventoryUI Instance;
 
     private List<InventorySlotUI> slots = new();
 
@@ -19,6 +20,8 @@ public class InventoryUI : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         inputActions = new InputSystem_Actions();
     }
 
@@ -81,6 +84,7 @@ public class InventoryUI : MonoBehaviour
 
     public void Refresh()
     {
+        Debug.Log("Refresh UI");    
         List<InventoryItem> inventory =
             InventoryManager.Instance.items;
 

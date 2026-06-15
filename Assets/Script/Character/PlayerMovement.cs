@@ -101,14 +101,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnJump(InputAction.CallbackContext context)
-{
-    if (controller.isGrounded)
     {
-        animator.SetTrigger("Jump");
+        if (controller.isGrounded)
+        {
+            animator.SetTrigger("Jump");
 
-        yVelocity = Mathf.Sqrt(
-            jumpHeight * -2f * gravity
-        );
+            yVelocity = Mathf.Sqrt(
+                jumpHeight * -2f * gravity
+            );
+        }
     }
-}
 }
