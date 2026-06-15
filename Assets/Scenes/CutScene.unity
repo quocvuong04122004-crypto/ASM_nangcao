@@ -357,10 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneManager
   videoPlayer: {fileID: 617846281}
-  cutsceneCanvas: {fileID: 1275612897}
-  nextSceneName: MainGame
-  skipKey: 32
-  isEnding: 0
+  nextScene: GameScene
 --- !u!82 &617846280
 AudioSource:
   m_ObjectHideFlags: 0
