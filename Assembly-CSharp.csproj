@@ -65,6 +65,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
+    <Compile Include="Assets\Script\Quiz\QuizManager.cs" />
     <Compile Include="Assets\Asset_Character\ithappy\Animals_FREE\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Script\UI\VolumeUI.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Script\Inventory\InventorySlotUI.cs" />
+    <Compile Include="Assets\Script\Quiz\QuestionData.cs" />
     <Compile Include="Assets\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\PT_MouseLook.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Script\Character\PlayerInteract.cs" />
+    <Compile Include="Assets\Script\Quiz\ItemQuestion.cs" />
     <Compile Include="Assets\BOKI\LowPolyNature\Scripts\WaterfallAudio.cs" />
     <Compile Include="Assets\Script\UI\AudioSetting.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
@@ -1349,12 +1352,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">

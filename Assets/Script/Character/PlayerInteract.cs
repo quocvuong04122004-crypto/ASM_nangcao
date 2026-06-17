@@ -45,7 +45,9 @@ public class PlayerInteract : MonoBehaviour
     {
         if (nearbyItems.Count > 0)
         {
-            nearbyItems[0].Collect();
+            QuizManager.Instance.ShowQuestion(
+                nearbyItems[0]
+            );
         }
     }
 

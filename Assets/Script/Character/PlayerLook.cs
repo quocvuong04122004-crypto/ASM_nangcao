@@ -86,13 +86,18 @@ public class PlayerLook : MonoBehaviour
             maxZoom
         );
 
+        // ESC mở chuột
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        // CTRL khóa chuột
+        if (
+            Keyboard.current.leftCtrlKey.wasPressedThisFrame ||
+            Keyboard.current.rightCtrlKey.wasPressedThisFrame
+        )
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
