@@ -1,64 +1,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class HotbarUI : MonoBehaviour
 {
-    [SerializeField]
-    private List<Image> slotImages;
+    public static HotbarUI Instance;
 
-    private int selectedIndex = 0;
+    [SerializeField]
+    private List<InventorySlotUI> hotbarSlots;
+
+    private int selectedIndex;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
-        UpdateSelection();
+        Refresh();
     }
 
     private void Update()
     {
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
-        {
-            selectedIndex = 0;
-            UpdateSelection();
-        }
+            SelectSlot(0);
 
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
-        {
-            selectedIndex = 1;
-            UpdateSelection();
-        }
+            SelectSlot(1);
 
         if (Keyboard.current.digit3Key.wasPressedThisFrame)
-        {
-            selectedIndex = 2;
-            UpdateSelection();
-        }
+            SelectSlot(2);
 
         if (Keyboard.current.digit4Key.wasPressedThisFrame)
-        {
-            selectedIndex = 3;
-            UpdateSelection();
-        }
+            SelectSlot(3);
 
         if (Keyboard.current.digit5Key.wasPressedThisFrame)
+            SelectSlot(4);
+    }
+
+    private void SelectSlot(int index)
+    {
+        selectedIndex = index;
+        UpdateSelection();
+    }
+
+    public InventoryItem GetSelectedItem()
+    {
+        return InventoryManager.Instance.GetHotbarItem(selectedIndex);
+    }
+
+    public void Refresh()
+    {
+        var items = InventoryManager.Instance.items;
+
+        for (int i = 0; i < hotbarSlots.Count; i++)
         {
-            selectedIndex = 4;
-            UpdateSelection();
+            if (i < items.Count)
+                hotbarSlots[i].SetItem(items[i]);
+            else
+                hotbarSlots[i].Clear();
         }
+
+        UpdateSelection();
     }
 
     private void UpdateSelection()
     {
-        for (int i = 0; i < slotImages.Count; i++)
+        for (int i = 0; i < hotbarSlots.Count; i++)
         {
             if (i == selectedIndex)
             {
-                slotImages[i].color = Color.yellow;
+                hotbarSlots[i]
+                    .GetComponent<UnityEngine.UI.Image>()
+                    .color = Color.yellow;
             }
             else
             {
-                slotImages[i].color = Color.white;
+                hotbarSlots[i]
+                    .GetComponent<UnityEngine.UI.Image>()
+                    .color = Color.white;
             }
         }
     }

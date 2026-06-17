@@ -7,52 +7,64 @@ public class InventoryManager : MonoBehaviour
 
     public List<InventoryItem> items = new();
 
+    public int maxSlots = 25;
+    public int hotbarSlots = 5;
+
     private void Awake()
     {
         Instance = this;
     }
-    // public void AddItem(ItemData item, int amount)
-    // {
-    //     Debug.Log("AddItem được gọi");
-
-    //     InventoryItem existing =
-    //         items.Find(x => x.itemData == item);
-
-    //     if (existing != null && item.stackable)
-    //     {
-    //         existing.amount += amount;
-
-    //         Debug.Log("Cộng dồn: " + existing.amount);
-    //     }
-    //     else
-    //     {
-    //         items.Add(new InventoryItem(item, amount));
-
-    //         Debug.Log("Thêm item mới");
-    //     }
-
-    //     Debug.Log("Số item trong inventory: " + items.Count);
-
-    //     foreach (var i in items)
-    //     {
-    //         Debug.Log(i.itemData.name + " x" + i.amount);
-    //     }
-    // }
 
     public void AddItem(ItemData item, int amount)
-{
-    InventoryItem existing =
-        items.Find(x => x.itemData == item);
-
-    if (existing != null && item.stackable)
     {
-        existing.amount += amount;
-    }
-    else
-    {
-        items.Add(new InventoryItem(item, amount));
+        // Nếu stackable thì tìm item đã có
+        if (item.stackable)
+        {
+            InventoryItem existing =
+                items.Find(x => x.itemData == item);
+
+            if (existing != null)
+            {
+                existing.amount += amount;
+
+                RefreshAllUI();
+                return;
+            }
+        }
+
+        // Inventory đầy
+        if (items.Count >= maxSlots)
+        {
+            Debug.Log("Inventory Full");
+            return;
+        }
+
+        // Ưu tiên 5 slot đầu
+        if (items.Count < hotbarSlots)
+        {
+            items.Insert(items.Count,
+                new InventoryItem(item, amount));
+        }
+        else
+        {
+            items.Add(
+                new InventoryItem(item, amount));
+        }
+
+        RefreshAllUI();
     }
 
-    InventoryUI.Instance.Refresh();
-}
+    private void RefreshAllUI()
+    {
+        InventoryUI.Instance.Refresh();
+        HotbarUI.Instance.Refresh();
+    }
+
+    public InventoryItem GetHotbarItem(int index)
+    {
+        if (index < items.Count)
+            return items[index];
+
+        return null;
+    }
 }

@@ -84,15 +84,20 @@ public class InventoryUI : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log("Refresh UI");    
-        List<InventoryItem> inventory =
+        List<InventoryItem> items =
             InventoryManager.Instance.items;
+
+        int inventoryStartIndex =
+            InventoryManager.Instance.hotbarSlots;
 
         for (int i = 0; i < slots.Count; i++)
         {
-            if (i < inventory.Count)
+            int itemIndex =
+                inventoryStartIndex + i;
+
+            if (itemIndex < items.Count)
             {
-                slots[i].SetItem(inventory[i]);
+                slots[i].SetItem(items[itemIndex]);
             }
             else
             {

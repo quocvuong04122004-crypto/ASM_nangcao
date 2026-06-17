@@ -18,34 +18,28 @@ public class PlayerInteract : MonoBehaviour
         Debug.Log("PlayerInteract Enable");
 
         inputActions.Enable();
-
-        // inputActions.Player.Interact.performed += OnInteract;
     }
 
     private void OnDisable()
     {
-        // inputActions.Player.Interact.performed -= OnInteract;
-
         inputActions.Disable();
     }
 
-    // private void OnInteract(InputAction.CallbackContext context)
-    // {
-    //     Debug.Log("E được nhấn");
-
-    //     if (nearbyItems.Count > 0)
-    //     {
-    //         Debug.Log("Nhặt: " + nearbyItems[0].name);
-
-    //         nearbyItems[0].Collect();
-    //     }
-    // }
-
     private void Interact()
     {
+        // Xóa các item đã bị Destroy khỏi danh sách
+        nearbyItems.RemoveAll(item => item == null);
+
         if (nearbyItems.Count > 0)
         {
-            nearbyItems[0].Collect();
+            PickupItem item = nearbyItems[0];
+
+            // Xóa khỏi danh sách trước khi Collect
+            nearbyItems.RemoveAt(0);
+
+            Debug.Log("Nhặt: " + item.name);
+
+            item.Collect();
         }
     }
 
@@ -55,9 +49,12 @@ public class PlayerInteract : MonoBehaviour
 
         if (item != null)
         {
-            nearbyItems.Add(item);
+            if (!nearbyItems.Contains(item))
+            {
+                nearbyItems.Add(item);
 
-            Debug.Log("Vào vùng nhặt: " + item.name);
+                Debug.Log("Vào vùng nhặt: " + item.name);
+            }
         }
     }
 
@@ -72,20 +69,6 @@ public class PlayerInteract : MonoBehaviour
             Debug.Log("Ra khỏi vùng nhặt: " + item.name);
         }
     }
-
-    // private void Update()
-    // {
-    //     if (inputActions.Player.Interact.WasPressedThisFrame())
-    //     {
-    //         Debug.Log("E được nhấn");
-
-    //         if (nearbyItems.Count > 0)
-    //         {
-    //             Debug.Log("Nhặt: " + nearbyItems[0].name);
-    //             nearbyItems[0].Collect();
-    //         }
-    //     }
-    // }
 
     private void Update()
     {
