@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db82510a919c524ea9fe4bc772fd928, type: 3}
+  m_Name: CookMeat
+  m_EditorClassIdentifier: Assembly-CSharp::CraftRecipe
+  inputA: {fileID: 11400000, guid: 7183225deacf01745a42f7986dc0d331, type: 2}
+  amountA: 1
+  inputB: {fileID: 11400000, guid: d6f2a06f72b9a774bb6d10d53030a57e, type: 2}
+  amountB: 1
+  output: {fileID: 11400000, guid: 9166556f2ce9b1a408c47d59635ffcb1, type: 2}
