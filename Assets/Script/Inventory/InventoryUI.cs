@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -17,6 +18,19 @@ public class InventoryUI : MonoBehaviour
 
     private InputSystem_Actions inputActions;
     private bool isOpen;
+
+    //Viết thêm ở đây
+    [Header("Build")]
+    [SerializeField] private Button buildButton;
+
+    [SerializeField] private GameObject housePrefab;
+
+    [SerializeField] private Transform player;
+
+    [SerializeField] private float buildDistance = 6f;
+
+    private bool houseBuilt = false;
+
 
     private void Awake()
     {
@@ -84,7 +98,7 @@ public class InventoryUI : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log("Refresh UI");    
+        Debug.Log("Refresh UI");
         List<InventoryItem> inventory =
             InventoryManager.Instance.items;
 
@@ -99,10 +113,75 @@ public class InventoryUI : MonoBehaviour
                 slots[i].Clear();
             }
         }
+
+        //Viết thêm ở đây
+        UpdateBuildButton();
     }
 
     public bool IsOpen()
     {
         return isOpen;
+    }
+
+
+    //Viết thêm ở đây
+    private void UpdateBuildButton()
+    {
+        bool canBuild =
+            InventoryManager
+            .Instance
+            .items
+            .Count > 0;
+
+        buildButton.interactable =
+            canBuild &&
+            !houseBuilt;
+    }
+
+    public void SpawnHouse()
+    {
+        if (houseBuilt)
+            return;
+
+        if (
+            InventoryManager
+            .Instance
+            .items
+            .Count == 0
+        )
+            return;
+
+        Vector3 spawnPos =
+            player.position +
+            player.forward *
+            buildDistance;
+
+        RaycastHit hit;
+
+        if (
+            Physics.Raycast(
+                spawnPos + Vector3.up * 20,
+                Vector3.down,
+                out hit,
+                100
+            )
+        )
+        {
+            spawnPos =
+                hit.point;
+        }
+
+        Instantiate(
+            housePrefab,
+            spawnPos,
+            Quaternion.identity
+        );
+
+        houseBuilt = true;
+
+        buildButton.interactable =
+            false;
+
+        Debug.Log("Đã xây nhà");
     }
 }
