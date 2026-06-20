@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+//viết thêm ở đây
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -20,16 +22,33 @@ public class InventoryUI : MonoBehaviour
     private bool isOpen;
 
     //Viết thêm ở đây
-    [Header("Build")]
-    [SerializeField] private Button buildButton;
+    [Header("Build System")]
 
-    [SerializeField] private GameObject housePrefab;
+    [SerializeField]
+    private Button buildButton;
 
-    [SerializeField] private Transform player;
+    [SerializeField]
+    private TMP_Text buildButtonText;
 
-    [SerializeField] private float buildDistance = 6f;
+    [SerializeField]
+    private GameObject level1House;
 
-    private bool houseBuilt = false;
+    [SerializeField]
+    private GameObject level2House;
+
+    [SerializeField]
+    private Transform player;
+
+    [SerializeField]
+    private float buildDistance = 8f;
+
+    private GameObject currentHouse;
+
+    private bool houseCreated;
+
+    private bool houseUpdated;
+
+    //-----
 
 
     private void Awake()
@@ -57,6 +76,8 @@ public class InventoryUI : MonoBehaviour
 
         CreateSlots();
         Refresh();
+        //viết thêm ở đây
+        UpdateBuildButton();
     }
 
     private void OnInventory(InputAction.CallbackContext context)
@@ -127,61 +148,124 @@ public class InventoryUI : MonoBehaviour
     //Viết thêm ở đây
     private void UpdateBuildButton()
     {
-        bool canBuild =
-            InventoryManager
-            .Instance
-            .items
-            .Count > 0;
+        int itemCount =
+        InventoryManager
+        .Instance
+        .items
+        .Count;
 
-        buildButton.interactable =
-            canBuild &&
-            !houseBuilt;
+        if (!houseCreated)
+        {
+            buildButton.interactable =
+                itemCount >= 1;
+
+            buildButtonText.text =
+                "Khởi tạo";
+        }
+        else if (
+            houseCreated &&
+            !houseUpdated
+        )
+        {
+            buildButton.interactable =
+                itemCount >= 2;
+
+            buildButtonText.text =
+                "Update";
+        }
+        else
+        {
+            buildButton.interactable =
+                false;
+
+            buildButtonText.text =
+                "Hoàn thành";
+        }
+
     }
 
-    public void SpawnHouse()
+    public void BuildOrUpgrade()
     {
-        if (houseBuilt)
-            return;
+        if (!houseCreated)
+        {
+            SpawnHouse();
+        }
+        else
+        {
+            UpgradeHouse();
+        }
+    }
 
-        if (
-            InventoryManager
-            .Instance
-            .items
-            .Count == 0
-        )
-            return;
-
-        Vector3 spawnPos =
-            player.position +
-            player.forward *
-            buildDistance;
+    private void SpawnHouse()
+    {
+        Vector3 pos =
+        player.position +
+        player.forward *
+        buildDistance;
 
         RaycastHit hit;
 
         if (
             Physics.Raycast(
-                spawnPos + Vector3.up * 20,
+                pos +
+                Vector3.up * 20,
                 Vector3.down,
                 out hit,
                 100
             )
         )
         {
-            spawnPos =
+            pos =
                 hit.point;
         }
 
-        Instantiate(
-            housePrefab,
-            spawnPos,
-            Quaternion.identity
+        currentHouse =
+            Instantiate(
+                level1House,
+                pos,
+                Quaternion.identity
+            );
+
+        houseCreated =
+            true;
+
+        UpdateBuildButton();
+
+    }
+
+    private void UpgradeHouse()
+    {
+        if (
+        currentHouse ==
+        null
+        )
+            return;
+
+        Vector3 pos =
+            currentHouse
+            .transform
+            .position;
+
+        Quaternion rot =
+            currentHouse
+            .transform
+            .rotation;
+
+        Destroy(
+            currentHouse
         );
 
-        houseBuilt = true;
+        currentHouse =
+            Instantiate(
+                level2House,
+                pos,
+                rot
+            );
 
-        buildButton.interactable =
-            false;
+        houseUpdated =
+            true;
 
-        Debug.Log("Đã xây nhà");
+        UpdateBuildButton();
+
     }
 }

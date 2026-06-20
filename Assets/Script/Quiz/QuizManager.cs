@@ -30,6 +30,11 @@ public class QuizManager : MonoBehaviour
 
     public void ShowQuestion(PickupItem item)
     {
+        //viết thêm ở đây
+        if (item == null)
+        {Debug.Log("item null");
+        return;}
+        //---
         currentItem = item;
 
         panel.SetActive(true);
@@ -42,13 +47,36 @@ public class QuizManager : MonoBehaviour
         btnD.GetComponentInChildren<TMP_Text>().text = item.answerD;
     }
 
+    // public void CheckAnswer(int answerIndex)
+    // {
+    //     if (answerIndex == currentItem.correctAnswer)
+    //     {
+    //         Debug.Log("Đúng");
+    //         currentItem.Collect();
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("Sai");
+    //     }
+
+    //     panel.SetActive(false);
+    // }
+
     public void CheckAnswer(int answerIndex)
     {
+        if (currentItem == null)
+        {
+            panel.SetActive(false);
+            return;
+        }
+
         if (answerIndex == currentItem.correctAnswer)
         {
             Debug.Log("Đúng");
 
             currentItem.Collect();
+
+            currentItem = null;
         }
         else
         {
