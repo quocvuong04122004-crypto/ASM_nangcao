@@ -47,9 +47,11 @@ public class PickupItem : MonoBehaviour
 
     public void Collect()
     {
-        if (collected)
+        if (collected){    
+            Debug.Log("đã nhặt được item");
             return;
-            
+            }
+
         collected = true;
         InventoryManager.Instance.AddItem(itemData,amount);
         Destroy(gameObject);
