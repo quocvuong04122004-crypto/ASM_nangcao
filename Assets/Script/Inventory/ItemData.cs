@@ -18,4 +18,6 @@ public class ItemData : ScriptableObject
 
     public bool stackable = true;
     public int maxStack = 99;
+
+    public GameObject handPrefab;
 }

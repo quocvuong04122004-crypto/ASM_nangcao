@@ -67,4 +67,65 @@ public class InventoryManager : MonoBehaviour
 
         return null;
     }
+
+    public InventoryItem GetSelectedItem()
+    {
+        int index = HotbarUI.Instance.SelectedIndex;
+
+        if (index >= items.Count)
+            return null;
+
+        return items[index];
+    }
+
+    public void UseSelectedItem()
+    {
+        InventoryItem item = GetSelectedItem();
+
+        if (item == null)
+            return;
+
+        switch (item.itemData.itemType)
+        {
+            case ItemType.Food:
+                EatFood(item);
+                break;
+
+            case ItemType.Tool:
+                UseTool(item);
+                break;
+
+            case ItemType.Building:
+                PlaceBuilding(item);
+                break;
+
+            case ItemType.Resource:
+                Debug.Log("Không thể dùng Resource");
+                break;
+        }
+    }
+
+    private void EatFood(InventoryItem item)
+    {
+        Debug.Log("Ăn: " + item.itemData.itemName);
+
+        item.amount--;
+
+        if (item.amount <= 0)
+        {
+            items.Remove(item);
+        }
+
+        RefreshAllUI();
+    }
+
+    private void UseTool(InventoryItem item)
+    {
+        Debug.Log("Dùng công cụ: " + item.itemData.itemName);
+    }
+
+    private void PlaceBuilding(InventoryItem item)
+    {
+        Debug.Log("Đặt công trình: " + item.itemData.itemName);
+    }
 }

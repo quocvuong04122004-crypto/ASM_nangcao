@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class HotbarUI : MonoBehaviour
 {
     public static HotbarUI Instance;
+    public int SelectedIndex => selectedIndex;
 
     [SerializeField]
     private List<InventorySlotUI> hotbarSlots;
@@ -24,24 +25,54 @@ public class HotbarUI : MonoBehaviour
     private void Update()
     {
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
             SelectSlot(0);
+        }
 
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
             SelectSlot(1);
+        }
 
         if (Keyboard.current.digit3Key.wasPressedThisFrame)
+        {
             SelectSlot(2);
+        }
 
         if (Keyboard.current.digit4Key.wasPressedThisFrame)
+        {
             SelectSlot(3);
+        }
 
         if (Keyboard.current.digit5Key.wasPressedThisFrame)
+        {
             SelectSlot(4);
+        }
     }
 
     private void SelectSlot(int index)
     {
         selectedIndex = index;
+
+        Debug.Log($"Da chon slot {selectedIndex + 1}");
+
+        InventoryItem item = GetSelectedItem();
+
+        if (item != null)
+        {
+            Debug.Log($"Item hien tai: {item.itemData.itemName}");
+
+            PlayerHand.Instance.ShowItem(
+                item.itemData.handPrefab
+            );
+        }
+        else
+        {
+            Debug.Log("Slot rong");
+
+            PlayerHand.Instance.ShowItem(null);
+        }
+
         UpdateSelection();
     }
 
