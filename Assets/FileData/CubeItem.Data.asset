@@ -17,4 +17,4 @@ MonoBehaviour:
   itemType: 0
   stackable: 1
   maxStack: 99
-  handPrefab: {fileID: 4260728501014647258, guid: 8384dc0b9a487d94eae8680a96141382, type: 3}
+  handPrefab: {fileID: 4260728501014647258, guid: b58e24b241407b44badde0a58b395938, type: 3}
