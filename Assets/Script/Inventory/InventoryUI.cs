@@ -47,6 +47,9 @@ public class InventoryUI : MonoBehaviour
     private bool houseCreated;
 
     private bool houseUpdated;
+    private Vector3 selectedPos;
+
+    private bool positionSelected;
 
     //-----
 
@@ -149,39 +152,38 @@ public class InventoryUI : MonoBehaviour
     private void UpdateBuildButton()
     {
         int itemCount =
-        InventoryManager
-        .Instance
-        .items
-        .Count;
+            InventoryManager
+            .Instance
+            .items
+            .Count;
 
         if (!houseCreated)
         {
             buildButton.interactable =
-                itemCount >= 1;
+                itemCount >= 1 &&
+                positionSelected;
 
             buildButtonText.text =
-                "Khởi tạo";
+                "Build";
         }
-        else if (
-            houseCreated &&
-            !houseUpdated
-        )
+
+        else if (!houseUpdated)
         {
             buildButton.interactable =
                 itemCount >= 2;
 
             buildButtonText.text =
-                "Update";
+                "Upgrade";
         }
+
         else
         {
             buildButton.interactable =
                 false;
 
             buildButtonText.text =
-                "Hoàn thành";
+                "Done";
         }
-
     }
 
     public void BuildOrUpgrade()
@@ -198,74 +200,93 @@ public class InventoryUI : MonoBehaviour
 
     private void SpawnHouse()
     {
-        Vector3 pos =
-        player.position +
-        player.forward *
-        buildDistance;
-
-        RaycastHit hit;
-
-        if (
-            Physics.Raycast(
-                pos +
-                Vector3.up * 20,
-                Vector3.down,
-                out hit,
-                100
-            )
-        )
-        {
-            pos =
-                hit.point;
-        }
-
         currentHouse =
             Instantiate(
                 level1House,
-                pos,
+                selectedPos,
                 Quaternion.identity
             );
 
-        houseCreated =
-            true;
+        houseCreated = true;
+
+        positionSelected = false;
 
         UpdateBuildButton();
-
     }
 
     private void UpgradeHouse()
     {
-        if (
-        currentHouse ==
-        null
-        )
+        if (currentHouse == null)
             return;
 
         Vector3 pos =
-            currentHouse
-            .transform
-            .position;
+            currentHouse.transform.position;
 
-        Quaternion rot =
-            currentHouse
-            .transform
-            .rotation;
-
-        Destroy(
-            currentHouse
-        );
+        Destroy(currentHouse);
 
         currentHouse =
             Instantiate(
                 level2House,
                 pos,
-                rot
+                Quaternion.identity
             );
 
         houseUpdated =
             true;
 
-        UpdateBuildButton();
+        InventoryManager
+            .Instance
+            .items
+            .Clear();
 
+        Refresh();
+
+        UpdateBuildButton();
+    }
+    public void SelectBuildPosition()
+    {
+        if (houseCreated)
+            return;
+
+        Ray ray =
+            Camera.main
+            .ScreenPointToRay(
+                Mouse.current
+                .position
+                .ReadValue()
+            );
+
+        RaycastHit hit;
+
+        if (
+            Physics.Raycast(
+                ray,
+                out hit,
+                100
+            )
+        )
+        {
+            selectedPos =
+                hit.point;
+
+            positionSelected =
+                true;
+
+            Debug.Log(
+                "Đã chọn vị trí"
+            );
+
+            UpdateBuildButton();
+        }
+    }
+    private void Update()
+    {
+        if (
+            Mouse.current != null &&
+            Mouse.current.leftButton.wasPressedThisFrame
+        )
+        {
+            SelectBuildPosition();
+        }
     }
 }
