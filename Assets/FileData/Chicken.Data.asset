@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03f1e6e3df283a44af724f9282966be, type: 3}
+  m_Name: Chicken.Data
+  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  itemName: Cube
+  icon: {fileID: 21300000, guid: dc4cd4449be35454eae93fe15ae8eed8, type: 3}
+  itemType: 0
+  stackable: 1
+  maxStack: 99
+  handPrefab: {fileID: 4260728501014647258, guid: b58e24b241407b44badde0a58b395938, type: 3}
