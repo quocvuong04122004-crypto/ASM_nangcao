@@ -43,23 +43,56 @@ public class PlayerInteract : MonoBehaviour
 
     private void Interact()
     {
-        if (nearbyItems.Count > 0)
+        nearbyItems.RemoveAll(
+            x =>
+            x == null
+        );
+
+        if (
+            nearbyItems.Count
+            ==
+            0
+        )
         {
-            QuizManager.Instance.ShowQuestion(
+            Debug.Log(
+                "Không có item"
+            );
+
+            return;
+        }
+
+        QuizManager
+            .Instance
+            .ShowQuestion(
                 nearbyItems[0]
             );
-        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(
+Collider other
+)
     {
-        PickupItem item = other.GetComponent<PickupItem>();
+        PickupItem item =
+            other
+            .GetComponent
+            <PickupItem>();
 
         if (item != null)
         {
-            nearbyItems.Add(item);
+            if (
+                !nearbyItems
+                .Contains(item)
+            )
+            {
+                nearbyItems
+                .Add(item);
+            }
 
-            Debug.Log("Vào vùng nhặt: " + item.name);
+            Debug.Log(
+                "Vào vùng nhặt: "
+                +
+                item.name
+            );
         }
     }
 
@@ -91,7 +124,17 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        if (inputActions.Player.Interact.WasPressedThisFrame())
+        nearbyItems.RemoveAll(
+            x =>
+            x == null
+        );
+
+        if (
+            inputActions
+            .Player
+            .Interact
+            .WasPressedThisFrame()
+        )
         {
             Interact();
         }

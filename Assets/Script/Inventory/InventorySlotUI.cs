@@ -9,7 +9,11 @@ public class InventorySlotUI : MonoBehaviour
 
     public void SetItem(InventoryItem item)
     {
-
+        if (item == null||item.itemData == null)
+            {
+                Clear();
+                return;
+            }
         Debug.Log(item);
         Debug.Log(item.itemData);
         Debug.Log(icon);

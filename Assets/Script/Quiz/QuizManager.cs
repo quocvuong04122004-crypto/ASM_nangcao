@@ -32,8 +32,10 @@ public class QuizManager : MonoBehaviour
     {
         //viết thêm ở đây
         if (item == null)
-        {Debug.Log("item null");
-        return;}
+        {
+            Debug.Log("item null");
+            return;
+        }
         //---
         currentItem = item;
 
@@ -70,19 +72,26 @@ public class QuizManager : MonoBehaviour
             return;
         }
 
-        if (answerIndex == currentItem.correctAnswer)
+        PickupItem itemToCollect =
+            currentItem;
+
+        panel.SetActive(false);
+
+        if (
+            answerIndex
+            ==
+            itemToCollect.correctAnswer
+        )
         {
             Debug.Log("Đúng");
 
-            currentItem.Collect();
-
             currentItem = null;
+
+            itemToCollect.Collect();
         }
         else
         {
             Debug.Log("Sai");
         }
-
-        panel.SetActive(false);
     }
 }

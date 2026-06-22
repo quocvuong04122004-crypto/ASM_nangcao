@@ -45,15 +45,51 @@ public class PickupItem : MonoBehaviour
 
     private bool collected;
 
+    // public void Collect()
+    // {
+    //     if (collected)
+    //     {
+    //         Debug.Log("đã nhặt được item");
+    //         return;
+    //     }
+
+    //     collected = true;
+    //     InventoryManager.Instance.AddItem(itemData, amount);
+    //     Destroy(gameObject);
+    // }
     public void Collect()
     {
-        if (collected){    
+        if (collected)
+        {
             Debug.Log("đã nhặt được item");
             return;
-            }
+        }
+
+        if (itemData == null)
+        {
+            Debug.LogError(
+                gameObject.name +
+                " itemData NULL"
+            );
+
+            return;
+        }
 
         collected = true;
-        InventoryManager.Instance.AddItem(itemData,amount);
+
+        Debug.Log(
+            "Nhặt: "
+            +
+            itemData.itemName
+        );
+
+        InventoryManager
+            .Instance
+            .AddItem(
+                itemData,
+                amount
+            );
+
         Destroy(gameObject);
     }
 

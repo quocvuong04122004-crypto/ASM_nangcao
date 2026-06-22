@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 //viết thêm ở đây
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -81,6 +82,8 @@ public class InventoryUI : MonoBehaviour
         Refresh();
         //viết thêm ở đây
         UpdateBuildButton();
+        buildButton.gameObject
+        .SetActive(true);
     }
 
     private void OnInventory(InputAction.CallbackContext context)
@@ -123,8 +126,8 @@ public class InventoryUI : MonoBehaviour
     public void Refresh()
     {
         Debug.Log("Refresh UI");
-        List<InventoryItem> inventory =
-            InventoryManager.Instance.items;
+        List<InventoryItem> inventory = InventoryManager.Instance.items;
+        inventory.RemoveAll(x => x == null || x.itemData == null);
 
         for (int i = 0; i < slots.Count; i++)
         {
@@ -151,16 +154,16 @@ public class InventoryUI : MonoBehaviour
     //Viết thêm ở đây
     private void UpdateBuildButton()
     {
-        int itemCount =
+        int totalItem =
             InventoryManager
             .Instance
-            .items
-            .Count;
+            .GetTotalItem();
 
         if (!houseCreated)
         {
             buildButton.interactable =
-                itemCount >= 1 &&
+                totalItem >= 1
+                &&
                 positionSelected;
 
             buildButtonText.text =
@@ -170,7 +173,9 @@ public class InventoryUI : MonoBehaviour
         else if (!houseUpdated)
         {
             buildButton.interactable =
-                itemCount >= 2;
+                InventoryManager
+                .Instance
+                .HasUpgradeMaterial();
 
             buildButtonText.text =
                 "Upgrade";
@@ -178,11 +183,8 @@ public class InventoryUI : MonoBehaviour
 
         else
         {
-            buildButton.interactable =
-                false;
-
-            buildButtonText.text =
-                "Done";
+            buildButton.gameObject
+                .SetActive(false);
         }
     }
 
@@ -216,11 +218,20 @@ public class InventoryUI : MonoBehaviour
 
     private void UpgradeHouse()
     {
+        if (
+            !InventoryManager
+            .Instance
+            .HasUpgradeMaterial()
+        )
+            return;
+
         if (currentHouse == null)
             return;
 
         Vector3 pos =
-            currentHouse.transform.position;
+            currentHouse
+            .transform
+            .position;
 
         Destroy(currentHouse);
 
@@ -231,20 +242,20 @@ public class InventoryUI : MonoBehaviour
                 Quaternion.identity
             );
 
-        houseUpdated =
-            true;
-
-        InventoryManager
-            .Instance
-            .items
-            .Clear();
-
+        houseUpdated = true;
+        InventoryManager.Instance.items
+        .RemoveAll(x =>x != null&&x
+        .itemData != null&&(x
+        .itemData.itemName=="Wood"||x
+        .itemData.itemName=="Stone"));
         Refresh();
 
         UpdateBuildButton();
     }
     public void SelectBuildPosition()
     {
+        if (positionSelected)
+            return;
         if (houseCreated)
             return;
 
@@ -286,7 +297,18 @@ public class InventoryUI : MonoBehaviour
             Mouse.current.leftButton.wasPressedThisFrame
         )
         {
-            SelectBuildPosition();
+            if (
+                !EventSystem
+                .current
+                .IsPointerOverGameObject()
+            )
+            {
+                SelectBuildPosition();
+            }
         }
+    }
+    public void ResetBuildPosition()
+    {
+        positionSelected = false;
     }
 }

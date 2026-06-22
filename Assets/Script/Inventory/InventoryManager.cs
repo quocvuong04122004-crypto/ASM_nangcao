@@ -39,20 +39,117 @@ public class InventoryManager : MonoBehaviour
     //     }
     // }
 
-    public void AddItem(ItemData item, int amount)
+    public void AddItem(ItemData item,int amount)
+    {
+        if (item == null)
+        {
+            Debug.Log("Item null");
+
+            return;
+        }
+
+        InventoryItem existing =
+            items.Find(
+                x =>
+                x != null &&
+                x.itemData == item
+            );
+
+        if (
+            existing != null
+            &&
+            item.stackable
+        )
+        {
+            existing.amount += amount;
+        }
+        else
+        {
+            items.Add(
+                new InventoryItem(
+                    item,
+                    amount
+                )
+            );
+        }
+
+        if (
+            InventoryUI.Instance
+            != null
+        )
+        {
+            InventoryUI.Instance
+            .Refresh();
+        }
+    }
+    public int GetTotalItem()
+    {
+        int total = 0;
+
+        foreach (
+            var item
+            in items
+        )
+        {
+            total += item.amount;
+        }
+
+        return total;
+    }
+    public bool HasUpgradeMaterial()
 {
-    InventoryItem existing =
-        items.Find(x => x.itemData == item);
+    bool hasWood =
+        false;
 
-    if (existing != null && item.stackable)
+    bool hasStone =
+        false;
+
+    foreach (
+        var item
+        in items
+    )
     {
-        existing.amount += amount;
-    }
-    else
-    {
-        items.Add(new InventoryItem(item, amount));
+        if (
+            item
+            ==
+            null
+            ||
+            item.itemData
+            ==
+            null
+        )
+        {
+            continue;
+        }
+
+        if (
+            item
+            .itemData
+            .itemName
+            ==
+            "Wood"
+        )
+        {
+            hasWood =
+                true;
+        }
+
+        if (
+            item
+            .itemData
+            .itemName
+            ==
+            "Stone"
+        )
+        {
+            hasStone =
+                true;
+        }
     }
 
-    InventoryUI.Instance.Refresh();
+    return
+        hasWood
+        &&
+        hasStone;
 }
 }
