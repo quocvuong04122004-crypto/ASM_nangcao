@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Cube
   icon: {fileID: 21300000, guid: dc4cd4449be35454eae93fe15ae8eed8, type: 3}
-  itemType: 0
+  itemType: 1
   stackable: 1
-  maxStack: 99
+  maxStack: 64
   handPrefab: {fileID: 4260728501014647258, guid: b58e24b241407b44badde0a58b395938, type: 3}
