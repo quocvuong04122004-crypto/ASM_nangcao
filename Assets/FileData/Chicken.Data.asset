@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03f1e6e3df283a44af724f9282966be, type: 3}
   m_Name: Chicken.Data
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Cube
-  icon: {fileID: 21300000, guid: dc4cd4449be35454eae93fe15ae8eed8, type: 3}
-  itemType: 0
+  itemName: Chicken
+  icon: {fileID: 21300000, guid: 8f086d659a8cacd41b4ecebde7d31ddb, type: 3}
+  itemType: 1
   stackable: 1
-  maxStack: 99
-  handPrefab: {fileID: 4260728501014647258, guid: b58e24b241407b44badde0a58b395938, type: 3}
+  maxStack: 64
+  handPrefab: {fileID: 384192913179074482, guid: 89d8113cf8bfd6e4aa6a3a24c853b525, type: 3}

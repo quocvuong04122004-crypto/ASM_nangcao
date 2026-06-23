@@ -81,6 +81,20 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("Walk", isMoving);
         animator.SetBool("Run", isMoving && isSprinting);
 
+        // Hunger
+        if (!isMoving)
+        {
+            PlayerStats.Instance.SetIdle();
+        }
+        else if (isSprinting)
+        {
+            PlayerStats.Instance.SetRunning();
+        }
+        else
+        {
+            PlayerStats.Instance.SetWalking();
+        }
+
         // Gravity
         if (controller.isGrounded && yVelocity < 0)
         {

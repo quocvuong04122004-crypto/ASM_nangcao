@@ -109,6 +109,9 @@ public class InventoryManager : MonoBehaviour
     {
         Debug.Log("Ăn: " + item.itemData.itemName);
 
+        // Hồi 20 điểm đói
+        PlayerStats.Instance.RestoreHunger(20);
+
         item.amount--;
 
         if (item.amount <= 0)
