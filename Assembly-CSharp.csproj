@@ -55,6 +55,7 @@
     <Compile Include="Assets\Script\Character\PlayerLook.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Script\MapGenerator.cs" />
+    <Compile Include="Assets\Script\Character\PlayerAttack.cs" />
     <Compile Include="Assets\Script\Character\PlayerStats.cs" />
     <Compile Include="Assets\BOKI\LowPolyNature\Scripts\FadeInOut.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Script\Inventory\InventorySlotUI.cs" />
     <Compile Include="Assets\Polytope Studio\Lowpoly_Demos\Environment_Free\Helpers\PT_MouseLook.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
+    <Compile Include="Assets\Script\Animal.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Script\Inventory\UI\HotbarUI.cs" />
     <Compile Include="Assets\Asset_Character\ithappy\Animals_FREE\Scripts\CreatureMover.cs" />
