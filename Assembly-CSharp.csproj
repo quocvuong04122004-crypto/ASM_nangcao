@@ -54,6 +54,7 @@
     <Compile Include="Assets\Script\Character\PlayerLook.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Script\HotbarUI.cs" />
+    <Compile Include="Assets\Script\MapGenerator.cs" />
     <Compile Include="Assets\Script\PickupItem.cs" />
     <Compile Include="Assets\BOKI\LowPolyNature\Scripts\FadeInOut.cs" />
     <Compile Include="Assets\Script\Inventory\InventoryUI.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Asset_Character\ithappy\Animals_FREE\Scripts\MovePlayerInput.cs" />
+    <Compile Include="Assets\Script\SpawnObject.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Script\Inventory\ItemData.cs" />

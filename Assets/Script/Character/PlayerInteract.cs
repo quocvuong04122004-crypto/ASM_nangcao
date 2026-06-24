@@ -19,27 +19,14 @@ public class PlayerInteract : MonoBehaviour
 
         inputActions.Enable();
 
-        // inputActions.Player.Interact.performed += OnInteract;
     }
 
     private void OnDisable()
     {
-        // inputActions.Player.Interact.performed -= OnInteract;
 
         inputActions.Disable();
     }
 
-    // private void OnInteract(InputAction.CallbackContext context)
-    // {
-    //     Debug.Log("E được nhấn");
-
-    //     if (nearbyItems.Count > 0)
-    //     {
-    //         Debug.Log("Nhặt: " + nearbyItems[0].name);
-
-    //         nearbyItems[0].Collect();
-    //     }
-    // }
 
     private void Interact()
     {
