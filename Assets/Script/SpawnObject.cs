@@ -12,4 +12,7 @@ public class SpawnObject
     public int maxAmount = 1;
 
     public Vector2 randomScale = new Vector2(1f, 1f);
+
+    [Header("Terrain")]
+    public float yOffset = 0f;
 }
